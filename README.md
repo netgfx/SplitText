@@ -8,14 +8,22 @@ AS3 functionality with JQuery and GSAP (Greensock javascript library)
 
 Choose one of the following options:
 
-1. 
-2. 
-
+-> var split = $(".splitText").splitText({'type':'words','animation':'explode','useLite':true});
+-> split.animate();
+or
+-> split.reverse();
 
 ## Features
 
 * HTML5 ready. Use the new elements with confidence.
-
+* Options Inlcude:
+1. type = 'lines', 'words', 'letters'
+2. animation = 'explode', 'slide', 'opacity', '3D', 'colorize'
+3. justSplit = 'lines', 'words', 'letters'
+4. duration = ...in seconds
+5. colorize = color hex (if effect is colorize)
+6. scale    = boolean
+7. useLite  = boolean (TimelineMax or TimelineLite)
 
 
 ## Documentation
