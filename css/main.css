@@ -129,7 +129,7 @@ font-size:20px;
 
 .menuItem{
 	background-color:#105CB6;
-	color:#000000;
+	color:#fff;
 	text-align:center;
 	float:left;
 	position:relative;
@@ -143,9 +143,8 @@ font-size:20px;
 	padding-right:10px;
 }
 
-
-.split-lines{
-	
+#type{
+	padding-right:0px;
 }
 
 .letter-measure{

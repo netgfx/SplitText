@@ -6,10 +6,10 @@
 		
 		// options //
 		// type = 'lines','words','letters'
-		// animation = 'explode','slide','opacity','3D'
+		// animation = 'explode','slide','opacity','3D','colorize'
 		// justSplit = 'lines','words','letters'
 		// duration = ...in seconds
-		// colorize = color hex ?
+		// colorize = color hex (if effect is colorize)
 		// scale    = boolean
 		// useLite  = boolean
 		
@@ -20,11 +20,11 @@
 			'justSplit' : false,
 			'duration'	: 1.0,
 			'scale'		: true,
-			'useLite'	: false
+			'useLite'	: false,
+			'colorize'	: null
 		};
 		
-		
-		if(options == null || options == undefined || options == '' || (options.type !== 'words' && options.type !== 'lines' && options !== 'letters')){
+		if(options == null || options == undefined || options == '' || (options.type !== 'words' && options.type !== 'lines' && options.type !== 'letters')){
 			options = opts;
 		}
 		
@@ -34,14 +34,38 @@
 		
 		// element is the outer container //
 		var element = this;
+		//// setup the element ////
+		
+		if( element.hasClass('isSplit') ){
+			
+			element.empty();
+			element.text( $('#hidden_'+element.attr('id')).text() );
+			
+		}
+		else{
+			element.attr('id',String(Math.round(Math.random()*100+42)));
+			element.addClass('isSplit');
+		}
+		
 		var userInput = element.text();
 		var TMax = options.useLite==false?new TimelineMax():new TimelineLite();
 		
-		
-		//// setup the element ////
 		var initialText = element.text();
 		
+		var hiddenId = $('#hidden_'+element.attr('id'));
+		
+		var parentID = "hidden_"+element.attr('id');
+		if( document.getElementById(parentID) == undefined){
+			console.log('did not find it!');
+			$('body').append('<p class="hiddenText" id="hidden_'+element.attr('id')+'"></p>');
+			$(".hiddenText").text(userInput).css({'display':'none'});
+		}
+		
+		
+		
+		
 		//// SET ANIMATION TYPE ///
+		
 		
 		
 		if(options.type=='lines'){
@@ -76,6 +100,7 @@
 			element.empty();
 			element.html(result);
 		}
+		
 		
 		/////////////////////////////////////////////////////////////////////
 		
@@ -130,7 +155,6 @@
 		}
 		
 		 this.animate = function() {
-			console.log(options);
 			
 			if(options.type == 'letters'){  ////////////////////// ANIMATE LETTERS
 				TMax = new TimelineMax({align:'start'});
@@ -207,6 +231,9 @@
 			else if(options.animation == '3D'){
 				return get3D();
 			}
+			else if(options.animation == 'colorize'){
+				return getColor();
+			}
 			
 		}
 		
@@ -245,12 +272,19 @@
 		///// helper /////
 		
 		function getColor(){
-			return Math.random() * 0xffffff;	
+			if(options.colorize == undefined || options.colorize == null){
+				return {color:Math.random() * 0xffffff};	
+			}
+			else{
+				{color:options.colorize};
+			}
 		}
 		
 		function getRandom(max, min){
 			return Math.floor(Math.random() * (1 + max - min) + min);
 		}	
+		
+		
 		
 		return this;
 
