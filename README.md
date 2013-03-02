@@ -9,8 +9,11 @@ AS3 functionality with JQuery and GSAP (Greensock javascript library)
 Choose one of the following options:
 
 -> var split = $(".splitText").splitText({'type':'words','animation':'explode','useLite':true});
+
 -> split.animate();
+
 or
+
 -> split.reverse();
 
 ## Features
