@@ -228,10 +228,7 @@
 					var w = $(this).width();
 					
 					TMax.insert(
-						TweenMax.to($(this),options.duration,{
-							autoAlpha:0,
-							marginLeft:w,
-							ease:Circ.easeIn}),"-=0.45");
+						TweenMax.to($(this),options.duration,getAnimation(options,w)),"-=0.45");
 					}
 					else{
 						var pos  = $(this).offset();
@@ -256,13 +253,13 @@
 		////////////////////////////////////////////////////////////////////////////////////////////
 		
 		
-		 var getAnimation = function(options){
+		 var getAnimation = function(options,extra){
 			
 			if(options.animation == 'explode'){
 				return getExplode();
 			}
 			else if(options.animation == 'slide'){
-				
+				return getSlide(extra);
 			}
 			else if(options.animation == 'opacity'){
 				return {autoAlpha:0};
@@ -299,6 +296,15 @@
 					       autoAlpha:0
 				      };
 			
+		}
+		
+		function getSlide(w){
+					
+			return	{
+							autoAlpha:0,
+							marginLeft:w,
+							ease:Circ.easeIn
+						};
 		}
 		
 		function glowOnHover(color){
