@@ -6,10 +6,10 @@
 		
 		// options //
 		// type = 'lines','words','letters'
-		// animation = 'explode','slide','opacity','3D','colorize','smoke'
+		// animation = 'explode','slide','opacity','3D','colorize','smoke','glowOnHover'
 		// justSplit = 'lines','words','letters'
 		// duration = ...in seconds
-		// colorize = color hex (if effect is colorize)
+		// colorize = color hex (if effect is colorize) or glowOnHover
 		// scale    = boolean
 		// useLite  = boolean
 		
@@ -64,8 +64,8 @@
 		
 			$("<style>"+
 			".splitText{width: 600px;float: left;margin-top: 90px;margin-left: 20px;font-size:20px;}"+
-			".splitText>div{white-space:pre-line;float:left;margin-right:5px;}"+
-			".letter-measure{margin-right:0 !important;}"+
+			".splitText>div{white-space:pre-line;float:left;margin-right:5px;cursor:default;}"+
+			".letter-measure{margin-right:0 !important;cursor:default;}"+
 			".blank{margin-right:0px !important;white-space: pre !important;}"+
 			"</style>").appendTo(document.documentElement);
 		}
@@ -180,9 +180,10 @@
 			         		TweenMax.to($(this), options.duration, {'text-shadow':'none',color:'#000'});
 			         	});
 			  });
+			  
+			  return true;
 		 	}
 		 	
-		 	return true;
 		 	
 			if(options.type == 'letters'){  ////////////////////// ANIMATE LETTERS
 				TMax = new TimelineMax({align:'start'});
@@ -276,7 +277,10 @@
 				return getSmoke();
 			}
 			else if(options.animation == 'glowOnHover'){
-				return glowOnHover();
+				if(options.colorize == null || options.colorize == undefined){
+					options.colorize = '#FF0084';
+				}
+				return glowOnHover(options.colorize);
 			}
 			else{
 				return 'no animation selected!'
@@ -297,11 +301,11 @@
 			
 		}
 		
-		function glowOnHover(){
+		function glowOnHover(color){
 			
 			return {
-				textShadow:"2px 2px 15px rgba(145, 233, 0, 1)",             
-    			color:"#91ff00"
+				textShadow:"2px 2px 15px "+color,             
+    			color: color
 			}
 		}
 		
