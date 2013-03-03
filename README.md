@@ -33,6 +33,11 @@ or
 
 Will be coming soon...
 
+## Browser compatibility
+
+Firefox 3.5+, Google Chrome, Safari 4+, IE 8+, Opera 10+.
+
+* Of course some effects are more jerky in some browsers than others.
 
 ## Contributing
 
