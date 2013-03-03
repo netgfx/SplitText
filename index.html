@@ -15,8 +15,9 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.8.4/TweenMax.min.js"></script>
+       <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.0/TweenMax.min.js"></script>
        
+       <link href='http://fonts.googleapis.com/css?family=Wendy+One|Anton' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -28,6 +29,12 @@
         	<div class="menuItem" id="words">SPLIT TEXT!</div>
         	
         	<div class="menuItem" id="reverse">REVERSE!</div> 
+        	
+        	<select id="type" class="menuItem">
+        		<option selected="selected" value="words">WORDS</option>
+        		<option  value="letters">LETTERS</option>
+        		<option  value="lines">LINES</option>
+        	</select>
         </div>
         
         <p class="splitText">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>

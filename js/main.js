@@ -2,8 +2,8 @@
 $(document).ready(function(){
 	
 	
-	var split = $(".splitText").splitText({'type':'words','animation':'explode','useLite':true});
-
+	var split = $(".splitText").splitText({'type':'words','animation':'glowOnHover','useLite':true});
+	
 	$("#letters").on('click',function(){
 		split.animate();
 	});
@@ -25,7 +25,7 @@ $(document).ready(function(){
 		var value = $(this).val();
 		var opts = {'type':value,'animation':'explode','useLite':true};
 		
-		if(value = 'lines'){
+		if(value == 'lines'){
 			opts.animation = 'slide';
 		}
 		

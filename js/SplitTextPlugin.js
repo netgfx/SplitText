@@ -6,7 +6,7 @@
 		
 		// options //
 		// type = 'lines','words','letters'
-		// animation = 'explode','slide','opacity','3D','colorize'
+		// animation = 'explode','slide','opacity','3D','colorize','smoke'
 		// justSplit = 'lines','words','letters'
 		// duration = ...in seconds
 		// colorize = color hex (if effect is colorize)
@@ -33,7 +33,7 @@
 		}
 		
 		// element is the outer container //
-		var element = this;
+		var element = $(this);
 		//// setup the element ////
 		
 		if( element.hasClass('isSplit') ){
@@ -56,21 +56,25 @@
 		
 		var parentID = "hidden_"+element.attr('id');
 		if( document.getElementById(parentID) == undefined){
-			console.log('did not find it!');
+			
 			$('body').append('<p class="hiddenText" id="hidden_'+element.attr('id')+'"></p>');
 			$(".hiddenText").text(userInput).css({'display':'none'});
+			
+			///// SET CSS /////////////
+		
+			$("<style>"+
+			".splitText{width: 600px;float: left;margin-top: 90px;margin-left: 20px;font-size:20px;}"+
+			".splitText>div{white-space:pre-line;float:left;margin-right:5px;}"+
+			".letter-measure{margin-right:0 !important;}"+
+			".blank{margin-right:0px !important;white-space: pre !important;}"+
+			"</style>").appendTo(document.documentElement);
 		}
-		
-		
 		
 		
 		//// SET ANIMATION TYPE ///
 		
 		
-		
 		if(options.type=='lines'){
-			
-			threeDTimeline = new TimelineLite({align:'normal'});
 			
 			var result = splitWords(userInput);
 			
@@ -153,42 +157,69 @@
 		   return textAcc;
 		   
 		}
-		
+	
 		 this.animate = function() {
-			
+		 	
+		 	if(options.animation == 'glowOnHover'){
+		 		TMax = new TimelineMax({align:'start'});
+		 		var nChildren = element.children().length;
+		 		
+		 		var item;
+		 		TMax = new TimelineMax({align:'start'});
+		 		element.children().each(function(index,value){
+			         
+			         	item = $(this);
+			         	
+			         	$(this).on('mouseenter',function(){
+			         		
+			         		TweenMax.to($(this), options.duration, getAnimation(options));
+			         		
+			         	});
+			         	
+			         	$(this).on('mouseleave',function(){
+			         		TweenMax.to($(this), options.duration, {'text-shadow':'none',color:'#000'});
+			         	});
+			  });
+		 	}
+		 	
+		 	return true;
+		 	
 			if(options.type == 'letters'){  ////////////////////// ANIMATE LETTERS
 				TMax = new TimelineMax({align:'start'});
 				var nChildren = element.children().length;
+				
+				var item;
+				var pos;
 				for(var i=0;i<nChildren;i++){
 			         
-			         	var item = element.children().eq(i);
-			         	var pos  = item.offset();
+			         	item = element.children().eq(i);
+			         	pos  = item.offset();
 			         	item.css({'left':pos.left,'top':pos.top});
 			         	
-				         	TMax.insert(
-				         	TweenMax.to(item, options.duration, getAnimation(), 'explode'));
-				  		
-		
-						TMax.play();
+				        TMax.insert(TweenMax.to(item, options.duration, getAnimation(options), 'explode'));
 				}
+				
+				TMax.play();
 			}
 			else if(options.type == 'words'){ /////////////////////  ANIMATE WORDS
 				TMax = new TimelineMax();
 				var nChildren = element.children().length;
+				var pos;
 				
 				for(var i=0;i<nChildren;i++){
+				
 				  if(options.animation == 'explode'){
-				  		var pos  = element.children().eq(i).offset();
+				  		pos  = element.children().eq(i).offset();
 						element.children().eq(i).css({'left':pos.left,'top':pos.top});
 				  }	
-				  TMax.insert(TweenMax.to(element.children().eq(i), options.duration, getAnimation(), "3D"));
+				  TMax.insert(TweenMax.to(element.children().eq(i), options.duration, getAnimation(options), "3D"));
 				}
 				
 				TMax.play();
 			}
 			else if(options.type == 'lines'){ ///////////////// ANIMATE LINES
 				
-				TMax = new TimelineMax();
+				TMax = new TimelineMax({align:'normal'});
 				$(".split-lines").each(function(){
 					$(this).css({'white-space':'nowrap'});
 					
@@ -204,8 +235,7 @@
 					else{
 						var pos  = $(this).offset();
 						$(this).css({'left':pos.left,'top':pos.top});
-						TMax.insert(
-						TweenMax.to($(this),options.duration,getAnimation()));
+						TMax.insert( TweenMax.to($(this), options.duration, getAnimation(options)) );
 					}
 				});	
 				
@@ -214,10 +244,18 @@
 			
 			
 		};
+		
+		// ON REVERSE //
+		this.reverse = function(){
+			TMax.reverse();
+		};
+		
+		return this;
+	};
 		////////////////////////////////////////////////////////////////////////////////////////////
 		
 		
-		function getAnimation(){
+		 var getAnimation = function(options){
 			
 			if(options.animation == 'explode'){
 				return getExplode();
@@ -234,13 +272,22 @@
 			else if(options.animation == 'colorize'){
 				return getColor();
 			}
+			else if(options.animation == 'smoke'){
+				return getSmoke();
+			}
+			else if(options.animation == 'glowOnHover'){
+				return glowOnHover();
+			}
+			else{
+				return 'no animation selected!'
+			}
 			
 		}
 		
 		function getExplode(){
 			
 			return {
-					      'position':'absolute', 
+					       position:'absolute', 
 					       left:getRandom(-1000,1000), 
 					       top:getRandom(-500,350), 
 					       fontSize:"+=35",
@@ -248,6 +295,22 @@
 					       autoAlpha:0
 				      };
 			
+		}
+		
+		function glowOnHover(){
+			
+			return {
+				textShadow:"2px 2px 15px rgba(145, 233, 0, 1)",             
+    			color:"#91ff00"
+			}
+		}
+		
+		function getSmoke(){
+			
+			return {
+				textShadow:"0px 0px 15px #cdcdcd",
+    			color:"none" 
+			}
 		}
 		
 		function get3D(){
@@ -262,11 +325,6 @@
 				  	};
 			
 		}
-		
-		// ON REVERSE //
-		this.reverse = function(){
-			TMax.reverse();
-		};
 		
 		
 		///// helper /////
@@ -285,9 +343,5 @@
 		}	
 		
 		
-		
-		return this;
-
-	};
 	
 })(jQuery); /// end of plugin ///
