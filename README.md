@@ -21,10 +21,10 @@ or
 * HTML5 ready. Use the new elements with confidence.
 * Options Inlcude:
 1. type = 'lines', 'words', 'letters'
-2. animation = 'explode', 'slide', 'opacity', '3D', 'colorize'
+2. animation = 'explode', 'slide', 'opacity', '3D', 'colorize', 'smoke', 'glowOnHover'
 3. justSplit = 'lines', 'words', 'letters'
 4. duration = ...in seconds
-5. colorize = color hex (if effect is colorize)
+5. colorize = color hex (if effect is colorize or glowOnHover)
 6. scale    = boolean
 7. useLite  = boolean (TimelineMax or TimelineLite)
 
