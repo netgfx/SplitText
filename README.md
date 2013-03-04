@@ -28,6 +28,10 @@ or
 6. scale    = boolean
 7. useLite  = boolean (TimelineMax or TimelineLite)
 
+## Examples
+
+* You can view examples of this plugin [here](http://www.netgfx.com/trunk/splitText/examples/examples.html)
+
 
 ## Documentation
 

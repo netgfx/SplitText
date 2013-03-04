@@ -237,7 +237,7 @@ font-size:20px;
 	background:#f1f1f1 !important;
 }
 
-#blockGrey>.controls>div:before{
+#blockGrey>.controls>.arrowleft:before{
 	border-right-color:#f1f1f1 !important;
 }
 
@@ -479,7 +479,11 @@ text-align: center;
 margin: 0 auto;
 margin-top: 20px;
 position: relative;
-height: 60px;
+
+text-decoration: none;
+color: #1e1e1e;
+font-weight: bold;
+margin-left: -5px;
 }
 
 .file{
