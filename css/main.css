@@ -102,7 +102,7 @@ body{
 }
 
 p{
-	font-family: 'Wendy One', sans-serif;
+	font-family: 'Anton', sans-serif;
 }
 
 /*font-family: 'Anton', sans-serif;*/
@@ -161,9 +161,330 @@ font-size:20px;
 	padding-right:0px;
 }
 
+#mainContainer{
+	float:left;
+	position:fixed;
+	width:100%;
+	height:100%;
+}
+
+#finalBlock{
+	position:fixed;
+	width:100%;
+	height:100%;
+	text-align: center;
+}
+
+#blockGreen{
+	background-color:#1f3b08;
+	color:#f1f1f1;
+	position:fixed;
+	width:100%;
+	height:100%;
+	text-align: center;
+}
+
+#blockGrey{
+	background-color: #222222;
+	color:#f1f1f1;
+	width:100%;
+	height:100%;
+	position:fixed;
+	text-align: center;
+}
+
+#blockRed{
+	background-color:#f40000;
+	color:#1e1e1e;
+	width:100%;
+	height:100%;
+	position:fixed;
+	text-align: center;
+}
+
+#blockWhite{
+	background-color:#f1f1f1;
+	width:100%;
+	height:100%;
+	position:fixed;
+	text-align: center;
+}
+
+.splitText{
+	top:100px;
+	left:50%;
+	position:relative;
+	margin-left:-300px !important;
+}
+
+#blockRed>.splitText{
+	font-size:62px !important;
+	font-family:'Anton' sans-serif; 
+}
+
+#blockGreen>.splitText{
+	font-size:37px !important;
+	border-left-color: #f1f1f1 !important;
+}
+
+#blockGrey>.splitText{
+	font-size:37px !important;
+}
+
+#blockGrey>.controls>div{
+	border-color:#F1F1F1 !important;
+	border-right-color: #f1f1f1 !important;
+	background:#f1f1f1 !important;
+}
+
+#blockGrey>.controls>div:before{
+	border-right-color:#f1f1f1 !important;
+}
 
 
+#blockGreen>.controls>div{
+	border-color:#f1f1f1 !important;
+	border-left-color: #f1f1f1 !important;
+}
 
+.controls{
+position: absolute;
+top: 50px;
+left: 50%;
+width: 190px;
+margin-left: -95px;
+height: 50px;
+}
+
+.controls>div{
+	float:left;
+	margin-right:10px;
+}
+
+
+.play {
+	width:2em;
+	height:2em;
+	border-radius:50%;
+	position:relative;
+	border: 0.3em solid #2c2c2c;	
+}
+
+.play::before {
+position: absolute;
+content: "";
+top: 0.25em;
+left: 0.75em;
+width: 0em;
+height: 0em;
+border-top: 0.8em solid rgba(44, 44, 44, 0);
+border-bottom: 0.8em solid transparent;
+border-left: 0.8em solid #2C2C2C;
+}
+
+.next{
+	width:2em;
+	height:2em;
+	border-radius:50%;
+	position:relative;
+	border: 0.3em solid #2c2c2c;	
+}
+
+.next::before {
+position: absolute;
+content: "";
+top: 0.29em;
+left: 1em;
+width: 0em;
+height: 0em;
+border-top: 0.7em solid rgba(44, 44, 44, 0);
+border-bottom: 0.7em solid transparent;
+border-left: 0.7em solid #2C2C2C;
+}
+.next::after {
+position: absolute;
+content: "";
+top: 0.29em;
+left: 0.5em;
+width: 0em;
+height: 0em;
+border-top: 0.7em solid rgba(44, 44, 44, 0);
+border-bottom: 0.7em solid transparent;
+border-left: 0.7em solid #2C2C2C;
+}
+
+.back{
+	width:2em;
+	height:2em;
+	border-radius:50%;
+	position:relative;
+	border: 0.3em solid #2c2c2c;	
+}
+
+.back::before {
+position: absolute;
+content: "";
+top: 0.29em;
+right: 1em;
+width: 0em;
+height: 0em;
+border-top: 0.7em solid rgba(44, 44, 44, 0);
+border-bottom: 0.7em solid transparent;
+border-right: 0.7em solid #2C2C2C;
+}
+.back::after {
+position: absolute;
+content: "";
+top: 0.29em;
+right: 0.5em;
+width: 0em;
+height: 0em;
+border-top: 0.7em solid rgba(44, 44, 44, 0);
+border-bottom: 0.7em solid transparent;
+border-right: 0.7em solid #2C2C2C;
+}
+
+.arrowleft {
+background: #2C2C2C;
+font-size: 12px;
+position: relative;
+width: 1em;
+height: 1em;
+margin-right: -0.7em;
+top: 14px;
+margin-left: 10px;
+}
+
+.arrowleft::before {
+bottom: -0.66666666em;
+right: 0.8em;
+position: absolute;
+border-right: 1.2em solid #2C2C2C;
+border-top: 1.2em solid rgba(44, 44, 44, 0);
+border-bottom: 1.2em solid rgba(44, 44, 44, 0);
+content: "";
+}
+
+a.download-button {
+	display: block;
+	padding: 15px 20px 10px 20px;
+	color: #FFFFFF;
+	text-decoration: none;
+	font-size: 28px;
+	font-weight: bold;
+	background: #33A700 url('http://i.imgur.com/wt7UJ.png') no-repeat 92% 50%;
+	border: 2px solid #339410;
+	-webkit-box-shadow: 3px 3px 5px #000000;
+	-moz-box-shadow: 3px 3px 5px #000000;
+	box-shadow: 3px 3px 5px #000000;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-transition: 350ms;
+	-moz-transition: 350ms;
+	-o-transition: 350ms;
+	transition: 350ms;
+}
+ 
+a.download-button:hover {
+	background-color: #267C00;
+	background-position: 90% 50%;
+}
+ 
+a.download-button span {
+	font-size: 14px;
+	display: block;
+	margin-top: 2px;
+}
+
+#finalContainer{
+	position: fixed;
+margin: 0 auto;
+left: 50%;
+margin-left: -155px;
+top: 50%;
+margin-top: -100px;
+width: 335px;
+}
+
+.home {
+font-size: 9px;
+height: 1em;
+width: 0.5em;
+margin-top: 1em;
+margin-left: -1em;
+border-bottom: none;
+border-right: 1.5em solid #2C2C2C;
+border-left: 1.5em solid #2C2C2C;
+border-top: 1.4em solid #2C2C2C;
+position: relative;
+}
+
+.home::before {
+border-left: 2.4em solid transparent;
+position: absolute;
+content: "";
+top: -2.8em;
+right: -2.1em;
+width: 0em;
+height: 0em;
+border-right: 2.4em solid transparent;
+border-bottom: 1.5em solid #2C2C2C;
+}
+
+.file {
+font-size: 16px;
+border-top: 0.2em solid #2C2C2C;
+position: relative;
+width: 1em;
+height: 2em;
+border-right: 0.2em solid #2C2C2C;
+border-bottom: 0.2em solid #2C2C2C;
+}
+
+.file::before {
+bottom: -0.2em;
+left: -0.5em;
+position: absolute;
+width: 0.5em;
+height: 1.72em;
+border-left: 0.2em solid #2C2C2C;
+border-bottom: 0.2em solid #2C2C2C;
+content: "";
+}
+.file::after {
+top: -0.2em;
+left: -0.50em;
+position: absolute;
+border-right: 0.5em solid #2C2C2C;
+border-top: 0.5em solid transparent;
+content: "";
+}
+
+#finalContainer{
+	width: 500px;
+text-align: center;
+margin-left:-250px;
+}
+
+.home{
+	position: relative;
+margin: 0 auto;
+margin-top: 45px;
+margin-bottom: 20px;
+}
+
+#tutorial{
+text-align: center;
+margin: 0 auto;
+margin-top: 20px;
+position: relative;
+height: 60px;
+}
+
+.file{
+	margin:0 auto;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */

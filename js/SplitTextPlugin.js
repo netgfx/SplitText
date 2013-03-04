@@ -43,7 +43,7 @@
 			
 		}
 		else{
-			element.attr('id',String(Math.round(Math.random()*100+42)));
+			element.attr('id',String(Math.round(Math.random()*1000+42)));
 			element.addClass('isSplit');
 		}
 		
@@ -55,19 +55,25 @@
 		var hiddenId = $('#hidden_'+element.attr('id'));
 		
 		var parentID = "hidden_"+element.attr('id');
+		
 		if( document.getElementById(parentID) == undefined){
 			
 			$('body').append('<p class="hiddenText" id="hidden_'+element.attr('id')+'"></p>');
 			$(".hiddenText").text(userInput).css({'display':'none'});
 			
 			///// SET CSS /////////////
+			
+			if($("style:contains('.blank')").length < 1){ // check if style exists //
+				//console.log('style doesnt exist - add it!');
 		
-			$("<style>"+
-			".splitText{width: 600px;float: left;margin-top: 90px;margin-left: 20px;font-size:20px;}"+
-			".splitText>div{white-space:pre-line;float:left;margin-right:5px;cursor:default;}"+
-			".letter-measure{margin-right:0 !important;cursor:default;}"+
-			".blank{margin-right:0px !important;white-space: pre !important;}"+
-			"</style>").appendTo(document.documentElement);
+				$("<style rel='splitStyle'>"+
+				".splitText{max-width: 600px;float: left;margin-top: 90px;margin-left: 20px;font-size:20px;}"+
+				".splitText>div{white-space:pre-line;float:left;margin-right:5px;cursor:default;}"+
+				".letter-measure{margin-right:0 !important;cursor:default;}"+
+				".split-lines{white-space:nowrap !important;}"+
+				".blank{margin-right:0px !important;white-space: pre !important;}"+
+				"</style>").appendTo(document.documentElement);
+			}
 		}
 		
 		
@@ -194,10 +200,14 @@
 				for(var i=0;i<nChildren;i++){
 			         
 			         	item = element.children().eq(i);
-			         	pos  = item.offset();
-			         	item.css({'left':pos.left,'top':pos.top});
 			         	
-				        TMax.insert(TweenMax.to(item, options.duration, getAnimation(options), 'explode'));
+			         	if(options.animation == 'explode'){
+			         		pos  = item.position();
+			         		item.css({'left':pos.left,'top':pos.top});
+			         		console.log(pos.left,pos.top);
+						}			         	
+				        
+				        TMax.insert(TweenMax.to(item, options.duration, getAnimation(options)));
 				}
 				
 				TMax.play();
