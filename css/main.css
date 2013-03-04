@@ -247,6 +247,16 @@ font-size:20px;
 	border-left-color: #f1f1f1 !important;
 }
 
+.blocks>.controls>div{
+	border-color:#F1F1F1 !important;
+	border-right-color: #f1f1f1 !important;
+	background:#f1f1f1 !important;
+}
+
+.blocks>.controls>.arrowleft:before{
+	border-right-color:#f1f1f1 !important;
+}
+
 .controls{
 position: absolute;
 top: 50px;
