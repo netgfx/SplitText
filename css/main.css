@@ -219,6 +219,14 @@ font-size:20px;
 	text-align: center;
 }
 
+#blockBlack{
+	background-color:#010101;
+	width:100%;
+	height:100%;
+	position:fixed;
+	text-align: center;
+}
+
 .splitText{
 	top:100px;
 	left:50%;
@@ -233,7 +241,11 @@ font-size:20px;
 
 #blockBlue>.splitText{
 	font-size:40px !important;
-	
+}
+
+#blockBlack>.splitText{
+	font-size:40px !important;
+	color:#f1f1f1;
 }
 
 #blockGreen>.splitText{
@@ -255,6 +267,15 @@ font-size:20px;
 	border-right-color:#f1f1f1 !important;
 }
 
+#blockBlack>.controls>.arrowleft:before{
+	border-right-color:#f1f1f1 !important;
+}
+
+#blockBlack>.controls>div{
+	border-color:#F1F1F1 !important;
+	border-right-color: #f1f1f1 !important;
+	background:#f1f1f1 !important;
+}
 
 #blockGreen>.controls>div{
 	border-color:#f1f1f1 !important;

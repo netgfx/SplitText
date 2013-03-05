@@ -6,7 +6,7 @@
 		
 		// options //
 		// type = 'lines','words','letters'
-		// animation = 'explode','slide','opacity','3D','colorize','smoke','glowOnHover'
+		// animation = 'explode','slide','opacity','3D','colorize','smoke','glowOnHover','scramble'
 		// justSplit = 'lines','words','letters'
 		// duration = ...in seconds
 		// colorize = color hex (if effect is colorize) or glowOnHover
@@ -223,6 +223,27 @@
 		 		
 		 		return true;
 		 	}
+		 	else if(options.animation == 'blackout'){
+		 		
+		 		element.children().each(function(index,value){
+			         
+			         	item = $(this);
+			         	
+			         	$(this).on('mouseenter',function(){
+			         		//$(this).css({'background': '#222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat','-webkit-background-size': 125});
+			         		TweenMax.to($(this), options.duration, {
+							    color: 'rgba(255, 255, 255, 0.8)',
+							    'background-clip': 'text'
+							 })
+			         		
+			         	});
+			         	
+			         	$(this).on('mouseleave',function(){
+			         		TweenMax.to($(this), options.duration, getBlackout());
+			         	});
+			  	});
+		 		
+		 	}
 		 	
 		 	
 			if(options.type == 'letters'){  ////////////////////// ANIMATE LETTERS
@@ -257,7 +278,7 @@
 				  		pos  = element.children().eq(i).offset();
 						element.children().eq(i).css({'left':pos.left,'top':pos.top});
 				  }	
-				  TMax.insert(TweenMax.to(element.children().eq(i), options.duration, getAnimation(options), "3D"));
+				  TMax.insert(TweenMax.to(element.children().eq(i), options.duration, getAnimation(options)));
 				}
 				
 				TMax.play();
@@ -316,6 +337,12 @@
 			}
 			else if(options.animation == 'smoke'){
 				return getSmoke();
+			}
+			else if(options.animation == 'typography3D'){
+				return getTypography3D();
+			}
+			else if(options.animation == 'blackout'){
+				return getBlackout();
 			}
 			else if(options.animation == 'glowOnHover'){
 				if(options.colorize == null || options.colorize == undefined){
@@ -377,6 +404,33 @@
 					  	rotationY:getRandom(-360, -600),
 					  	autoAlpha:0
 				  	};
+			
+		}
+		
+		function getBlackout(){
+			return {
+				 textShadow:"1px 1px 1px rgba(255, 255, 255, 0.5)",
+    			 color:"#000"
+			};
+		}
+		
+		function getTypography3D(){
+			
+			return {
+				'text-shadow': 
+			   '0 1px 0 #ccc,'+
+			   '0 2px 0 #c9c9c9,'+
+			   '0 3px 0 #bbb,'+
+			   '0 4px 0 #b9b9b9,'+
+			   '0 5px 0 #aaa,'+
+			   '0 6px 1px rgba(0,0,0,.1),'+
+			   '0 0 5px rgba(0,0,0,.1),'+
+			   '0 1px 3px rgba(0,0,0,.3),'+
+			   '0 3px 5px rgba(0,0,0,.2),'+
+			   '0 5px 10px rgba(0,0,0,.25),'+
+			   '0 10px 10px rgba(0,0,0,.2),'+
+			   '0 20px 20px rgba(0,0,0,.15)'
+			};
 			
 		}
 		

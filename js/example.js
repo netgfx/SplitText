@@ -18,6 +18,11 @@ $(document).ready(function(){
 		'animation':'scramble'
 	});
 	
+	var blackout = $("#blackout").splitText({
+		'type':'words',
+		'animation':'blackout'
+	});
+	
 	var smoke = $("#smoke").splitText({
 		'type':'words',
 		'animation':'smoke'
@@ -46,6 +51,9 @@ $(document).ready(function(){
 		else if(selectedSlide == 'blockBlue'){
 			scramble.animate();
 		}
+		else if(selectedSlide == 'blockBlack'){
+			blackout.animate();
+		}
 		
 	});
 	
@@ -64,6 +72,9 @@ $(document).ready(function(){
 			threeD.reverse();
 		}
 		else if(selectedSlide == 'blockBlue'){
+			scramble.reverse();
+		}
+		else if(selectedSlide == 'blockBlack'){
 			scramble.reverse();
 		}
 	});
