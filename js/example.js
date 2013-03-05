@@ -13,6 +13,11 @@ $(document).ready(function(){
 		'animation':'3D'
 	});
 	
+	var scramble = $("#scramble").splitText({
+		'type':'words',
+		'animation':'scramble'
+	});
+	
 	var smoke = $("#smoke").splitText({
 		'type':'words',
 		'animation':'smoke'
@@ -38,6 +43,9 @@ $(document).ready(function(){
 		else if(selectedSlide == 'blockGreen'){
 			threeD.animate();
 		}
+		else if(selectedSlide == 'blockBlue'){
+			scramble.animate();
+		}
 		
 	});
 	
@@ -54,6 +62,9 @@ $(document).ready(function(){
 		}
 		else if(selectedSlide == 'blockGreen'){
 			threeD.reverse();
+		}
+		else if(selectedSlide == 'blockBlue'){
+			scramble.reverse();
 		}
 	});
 	

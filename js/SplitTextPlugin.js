@@ -166,6 +166,7 @@
 	
 		 this.animate = function() {
 		 	
+		 	
 		 	if(options.animation == 'glowOnHover'){
 		 		TMax = new TimelineMax({align:'start'});
 		 		var nChildren = element.children().length;
@@ -189,6 +190,39 @@
 			  
 			  return true;
 		 	}
+		 	else if(options.animation == 'scramble' && options.type=='words'){
+		 		
+		 		TMax = new TimelineMax({align:'start'});
+		 		var nChildren = element.children().length;
+		 		var angle = -Math.PI;
+		 		var center = getRandom(50,200);
+		 		var item;
+		 		var radius;
+		 		var dividers = 360/nChildren;
+		 		
+		 		TMax = new TimelineMax({align:'start'});
+		 		element.children().each(function(index,value){
+		 			
+		 			item = $(this);
+		 			var pos  = item.position();
+			        item.css({'left':pos.left,'top':pos.top});
+		 			radius = item.width()+Math.random()*100;
+		 			var x = Math.round(center+radius*Math.cos(angle));
+				    var y = Math.round(center+radius*Math.sin(angle));
+				   
+				    // rotation and rotating the text 90 degrees
+				    var turnangle = Math.atan2( y - getRandom(100,200), x - getRandom(100,200) ) * 180 / Math.PI + 90;
+		 			
+		 			TMax.insert(TweenMax.to(item,0.8,{'position':'absolute', 'left':x, 'top':y, rotation:turnangle, ease:Sine.easeOut}));
+		 			
+		 			var radians = dividers * (Math.PI / getRandom(10,270));
+		 			angle += radians;
+		 		});
+		 		
+		 		TMax.play();
+		 		
+		 		return true;
+		 	}
 		 	
 		 	
 			if(options.type == 'letters'){  ////////////////////// ANIMATE LETTERS
@@ -204,7 +238,7 @@
 			         	if(options.animation == 'explode'){
 			         		pos  = item.position();
 			         		item.css({'left':pos.left,'top':pos.top});
-			         		console.log(pos.left,pos.top);
+			         		//console.log(pos.left,pos.top);
 						}			         	
 				        
 				        TMax.insert(TweenMax.to(item, options.duration, getAnimation(options)));
