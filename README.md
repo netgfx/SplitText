@@ -21,7 +21,7 @@ or
 * HTML5 ready. Use the new elements with confidence.
 * Options Inlcude:
 1. type = 'lines', 'words', 'letters'
-2. animation = 'explode', 'slide', 'opacity', '3D', 'colorize', 'smoke', 'glowOnHover'
+2. animation = 'explode', 'slide', 'opacity', '3D', 'colorize', 'smoke', 'glowOnHover','typography3D','scramble','blackout'
 3. justSplit = 'lines', 'words', 'letters'
 4. duration = ...in seconds
 5. colorize = color hex (if effect is colorize or glowOnHover)
