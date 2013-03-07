@@ -203,7 +203,7 @@ font-size:20px;
 }
 
 #blockRed{
-	background-color:#f40000;
+	background-color:#cf0404;
 	color:#1e1e1e;
 	width:100%;
 	height:100%;
@@ -227,6 +227,14 @@ font-size:20px;
 	text-align: center;
 }
 
+#blockBlack2{
+	background-color:#000;
+	width:100%;
+	height:100%;
+	position:fixed;
+	text-align: center;
+}
+
 .splitText{
 	top:100px;
 	left:50%;
@@ -244,6 +252,11 @@ font-size:20px;
 }
 
 #blockBlack>.splitText{
+	font-size:40px !important;
+	color:#f1f1f1;
+}
+
+#blockBlack2>.splitText{
 	font-size:40px !important;
 	color:#f1f1f1;
 }
@@ -272,6 +285,16 @@ font-size:20px;
 }
 
 #blockBlack>.controls>div{
+	border-color:#F1F1F1 !important;
+	border-right-color: #f1f1f1 !important;
+	background:#f1f1f1 !important;
+}
+
+#blockBlack2>.controls>.arrowleft:before{
+	border-right-color:#f1f1f1 !important;
+}
+
+#blockBlack2>.controls>div{
 	border-color:#F1F1F1 !important;
 	border-right-color: #f1f1f1 !important;
 	background:#f1f1f1 !important;

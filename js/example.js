@@ -33,6 +33,11 @@ $(document).ready(function(){
 		'animation':'slide'
 	});
 	
+	var matrix = $("#matrix").splitText({
+		'type':'letters',
+		'animation':'matrix'
+	});
+	
 	
 	$(".play").on('click',function(){
 		
@@ -53,6 +58,9 @@ $(document).ready(function(){
 		}
 		else if(selectedSlide == 'blockBlack'){
 			blackout.animate();
+		}
+		else if(selectedSlide == 'blockBlack2'){
+			matrix.animate();
 		}
 		
 	});
@@ -76,6 +84,9 @@ $(document).ready(function(){
 		}
 		else if(selectedSlide == 'blockBlack'){
 			scramble.reverse();
+		}
+		else if(selectedSlide == 'matrix'){
+			matrix.reverse();
 		}
 	});
 	

@@ -190,7 +190,7 @@
 			  
 			  return true;
 		 	}
-		 	else if(options.animation == 'scramble' && options.type=='words'){
+		 	else if(options.animation == 'scramble'){
 		 		
 		 		TMax = new TimelineMax({align:'start'});
 		 		var nChildren = element.children().length;
@@ -224,13 +224,12 @@
 		 		return true;
 		 	}
 		 	else if(options.animation == 'blackout'){
-		 		
+		 		var item;
 		 		element.children().each(function(index,value){
 			         
 			         	item = $(this);
 			         	
 			         	$(this).on('mouseenter',function(){
-			         		//$(this).css({'background': '#222 -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff)) 0 0 no-repeat','-webkit-background-size': 125});
 			         		TweenMax.to($(this), options.duration, {
 							    color: 'rgba(255, 255, 255, 0.8)',
 							    'background-clip': 'text'
@@ -244,6 +243,31 @@
 			  	});
 		 		
 		 	}
+		 	else if(options.animation == 'matrix'){
+		 			
+		 		TMax = new TimelineMax({align:'start'});	
+		 		var parent = element.parent();
+		 		
+		 		element.children().each(function(index, value){
+		 			
+		 			var item = $(this);
+		 			var pos = $(this).position();
+		 		
+		 			 item.css({
+		 				 'top':getRandom(-800,0),
+		 				 'opacity':0,
+		 				 'left':pos.left
+		 			 });
+		 			
+		 			TMax.insert(TweenMax.to($(this),getRandom(0.5,2.5),getMatrixTo(pos.top)));
+		 			
+		 		});
+		 		
+		 		TMax.play();
+		 		
+		 		return true;
+		 	}
+		 	
 		 	
 		 	
 			if(options.type == 'letters'){  ////////////////////// ANIMATE LETTERS
@@ -350,6 +374,9 @@
 				}
 				return glowOnHover(options.colorize);
 			}
+			else if(options.animation == 'matrix'){
+				return getMatrixTo();
+			}
 			else{
 				return 'no animation selected!'
 			}
@@ -366,6 +393,20 @@
 					       ease:Circ.easeOut,
 					       autoAlpha:0
 				      };
+			
+		}
+		
+		function getMatrixTo(top){
+			
+			return {		
+							position:'absolute',
+							opacity:1,
+							top:top,
+							color:'#ffffff',
+							immediateRender:false,
+							ease:Circ.easeOut		
+			
+			};
 			
 		}
 		
