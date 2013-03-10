@@ -27,6 +27,7 @@ or
 5. colorize = color hex (if effect is colorize or glowOnHover)
 6. scale    = boolean
 7. useLite  = boolean (TimelineMax or TimelineLite)
+8. useCSS   = boolean (use external css, like splitText.css)
 
 ## Examples
 
