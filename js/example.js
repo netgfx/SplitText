@@ -2,10 +2,10 @@ var selectedSlide = 'blockWhite';
 $(document).ready(function(){
 	
 	
-	
 	var explode = $("#explode").splitText({
 		'type':'letters',
-		'animation':'explode'
+		'animation':'explode',
+		'useCSS':true
 	});
 	
 	var threeD = $("#threeD").splitText({

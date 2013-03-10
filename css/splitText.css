@@ -1,0 +1,31 @@
+
+/* BASE CSS FOR splitText PLUGIN */
+
+.splitText{
+width: 600px;
+float: left;
+margin-top: 90px;
+margin-left: 20px;
+font-size:20px;
+}
+
+.splitText>div{
+	white-space:pre-line;
+	float:left;
+	margin-right:5px;
+	cursor:default;
+}
+
+.letter-measure{
+	margin-right:0 !important;
+	cursor:default;
+}
+
+.split-lines{
+	white-space:nowrap !important;
+}
+
+.blank{
+	margin-right:0px !important;
+	white-space: pre !important;
+}

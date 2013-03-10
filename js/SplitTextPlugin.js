@@ -12,6 +12,7 @@
 		// colorize = color hex (if effect is colorize) or glowOnHover
 		// scale    = boolean
 		// useLite  = boolean
+		// useCSS   = boolean
 		
 		// default
 		var opts = {
@@ -21,7 +22,8 @@
 			'duration'	: 1.0,
 			'scale'		: true,
 			'useLite'	: false,
-			'colorize'	: null
+			'colorize'	: null,
+			'useCSS'	: false
 		};
 		
 		if(options == null || options == undefined || options == '' || (options.type !== 'words' && options.type !== 'lines' && options.type !== 'letters')){
@@ -63,8 +65,8 @@
 			
 			///// SET CSS /////////////
 			
-			if($("style:contains('.blank')").length < 1){ // check if style exists //
-				//console.log('style doesnt exist - add it!');
+			if($(".blank").css('white-space') !== 'pre' || options.useCSS == false){ // check if style exists //
+				//console.log('style doesnt exist - add it!'+$(".blank").css('white-space'));
 		
 				$("<style rel='splitStyle'>"+
 				".splitText{max-width: 600px;float: left;margin-top: 90px;margin-left: 20px;font-size:20px;}"+
