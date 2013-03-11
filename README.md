@@ -22,7 +22,7 @@ or
 * Options Inlcude:
 1. type = 'lines', 'words', 'letters'
 2. animation = 'explode', 'slide', 'opacity', '3D', 'colorize', 'smoke', 'glowOnHover','typography3D','scramble','blackout','matrix'
-3. justSplit = 'lines', 'words', 'letters'
+3. justSplit = boolean (just split only returns the splited text based on type, no animation)
 4. duration = ...in seconds
 5. colorize = color hex (if effect is colorize or glowOnHover)
 6. scale    = boolean

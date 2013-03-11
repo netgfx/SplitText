@@ -38,6 +38,21 @@ $(document).ready(function(){
 		'animation':'matrix'
 	});
 	
+	var splitOnlyWords = $("#splitOnlyWords").splitText({
+		'type':'words',
+		'justSplit':true
+	});
+	
+	var splitOnlyLetters = $("#splitOnlyLetters").splitText({
+		'type':'letters',
+		'justSplit':true
+	});
+	
+	var splitOnlyLines = $("#splitOnlyLines").splitText({
+		'type':'lines',
+		'justSplit':true
+	});
+	
 	
 	$(".play").on('click',function(){
 		
@@ -61,6 +76,27 @@ $(document).ready(function(){
 		}
 		else if(selectedSlide == 'blockBlack2'){
 			matrix.animate();
+		}
+		else if(selectedSlide == 'blockOrange'){
+			
+			console.log(splitOnlyWords.value);
+			$("#"+splitOnlyWords.id).empty().html(splitOnlyWords.value);
+			
+			console.log(splitOnlyLetters.value);
+			$("#"+splitOnlyLetters.id).empty().html(splitOnlyLetters.value);
+			
+			console.log(splitOnlyLines.value);
+			$("#"+splitOnlyLines.id).empty();
+			
+			$.each(splitOnlyLines.value,function(index,value){
+				
+				var item = "<div class='split-lines'>"+value.text+"</div>";
+				
+				$("#"+splitOnlyLines.id).append(item);
+				
+			});
+			
+			$("#blockOrange>.splitText>div").addClass('justSplit');
 		}
 		
 	});

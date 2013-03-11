@@ -89,6 +89,11 @@
 			element.html(result);
 		
 			var obj = splitLines();
+			
+			if(options.justSplit == true){
+				return {'id':element.attr('id'),'value':obj};
+			}
+			
 			element.empty();
 			
 			$.each(obj,function(index,value){
@@ -103,11 +108,19 @@
 		else if(options.type=='words'){
 			var result = splitWords(initialText);
 			
+			if(options.justSplit == true){
+				return {'id':element.attr('id'),'value':result};
+			}
+			
 			element.empty();
 			element.html(result);
 		}
 		else if(options.type=='letters'){
 			var result = splitLetters(initialText);
+			
+			if(options.justSplit == true){
+				return {'id':element.attr('id'),'value':result};
+			}
 			
 			element.empty();
 			element.html(result);
