@@ -54,6 +54,40 @@ $(document).ready(function(){
 	});
 	
 	
+	$("#menuList>li").on('click',function(){
+		
+		var _selectedSlide = String($(this).attr("id")).replace('menu_','');
+		var index = $("#mainContainer").children("#"+_selectedSlide).index();
+		var nChildren = $("#mainContainer").children().length;
+		var currentIndex = $("#mainContainer").children('.selected').index();
+				
+		if((index < currentIndex)){
+			$(".selected").removeClass('selected');
+			for(var i=nChildren;i>index;i--){
+				
+				TweenMax.to($("#mainContainer").children().eq(i),0.8,{'right':-2000,onComplete:function(){
+					
+				}});
+				
+			}
+		}
+		else{
+			$(".selected").removeClass('selected');
+			console.log(nChildren);
+			for(var j=currentIndex;j<=index;j++){
+				
+				TweenMax.to($("#mainContainer").children().eq(j),0.8,{'right':0,onComplete:function(){
+					
+				}});
+			}
+		}
+		
+		$("#mainContainer").children("div").eq(index).addClass('selected');
+		selectedSlide = _selectedSlide;
+		
+	});
+	
+	
 	$(".play").on('click',function(){
 		
 		if(selectedSlide == 'blockWhite'){

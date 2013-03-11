@@ -560,6 +560,40 @@ font-weight: bold;
 margin-left: -5px;
 }
 
+
+#hoverOver{
+	position:fixed;
+	background-color:#000;
+	opacity: 0.8;
+	border-radius:0px 10px 10px 0px;
+	width:200px;
+	float:left;
+	min-height:300px;
+}
+
+#menuList{
+	color:#ff7400;
+	text-align: center;
+	cursor: pointer;
+}
+
+#hoverOver>p{
+	color:#FF7400;
+	text-align: center;
+	width:100%;
+	cursor:default;
+	font-family:sans-serif !important;
+}
+
+#hoverOver>#menu_finalBlock{
+	cursor:pointer;
+}
+
+#menuList>li{
+	color:#ff7400;
+	text-align:left;
+}
+
 .file{
 	margin:0 auto;
 }
