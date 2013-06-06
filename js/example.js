@@ -38,6 +38,11 @@ $(document).ready(function(){
 		'animation':'matrix'
 	});
 	
+	var machinegun = $("#machinegun").splitText({
+		'type':'sentences',
+		'animation':'machinegun'
+	});
+	
 	var splitOnlyWords = $("#splitOnlyWords").splitText({
 		'type':'words',
 		'justSplit':true
@@ -73,7 +78,7 @@ $(document).ready(function(){
 		}
 		else{
 			$(".selected").removeClass('selected');
-			console.log(nChildren);
+			
 			for(var j=currentIndex;j<=index;j++){
 				
 				TweenMax.to($("#mainContainer").children().eq(j),0.8,{'right':0,onComplete:function(){
@@ -83,6 +88,13 @@ $(document).ready(function(){
 		}
 		
 		$("#mainContainer").children("div").eq(index).addClass('selected');
+		
+		TweenMax.delayedCall(0.8, function(){
+			if($(".selected").attr('id') == 'blockNavyBlue'){
+					machinegun.animate();
+				}
+		});
+		
 		selectedSlide = _selectedSlide;
 		
 	});
@@ -111,9 +123,11 @@ $(document).ready(function(){
 		else if(selectedSlide == 'blockBlack2'){
 			matrix.animate();
 		}
+		else if(selectedSlide == 'blockNavyBlue'){
+			machinegun.animate();
+		}
 		else if(selectedSlide == 'blockOrange'){
 			
-			console.log(splitOnlyWords.value);
 			$("#"+splitOnlyWords.id).empty().html(splitOnlyWords.value);
 			
 			console.log(splitOnlyLetters.value);
@@ -158,6 +172,9 @@ $(document).ready(function(){
 		else if(selectedSlide == 'matrix'){
 			matrix.reverse();
 		}
+		else if(selectedSlide == 'blockNavyBlue'){
+			machinegun.reverse();
+		}
 	});
 	
 	$(".next").on('click',function(){
@@ -171,6 +188,11 @@ $(document).ready(function(){
 				$(".selected").removeClass('selected');
 				$("#mainContainer").children("div").eq(index-1).addClass('selected');
 				selectedSlide = $("#mainContainer").children("div").eq(index-1).attr('id');
+				
+				if($(".selected").attr('id') == 'blockNavyBlue'){
+					machinegun.animate();
+				}
+				
 			}});
 		}
 	});
@@ -187,6 +209,10 @@ $(document).ready(function(){
 			
 			TweenMax.to($(".selected"),0.8,{'right':0,onComplete:function(){
 				
+				if($(".selected").attr('id') == 'blockNavyBlue'){
+					machinegun.animate();
+				}
+				
 			}});
 		}
 	});
@@ -200,7 +226,7 @@ $(document).ready(function(){
 		$("#mainContainer").children().each(function(){
 			
 			TweenMax.to($(this),0.4,{'right':0,onComplete:function(){
-			
+					
 			}});
 		});
 		

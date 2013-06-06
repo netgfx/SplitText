@@ -20,8 +20,8 @@ or
 
 * HTML5 ready. Use the new elements with confidence.
 * Options Inlcude:
-1. type = 'lines', 'words', 'letters'
-2. animation = 'explode', 'slide', 'opacity', '3D', 'colorize', 'smoke', 'glowOnHover','typography3D','scramble','blackout','matrix'
+1. type = 'lines', 'words', 'letters', 'sentences (new)'
+2. animation = 'explode', 'slide', 'opacity', '3D', 'colorize', 'smoke', 'glowOnHover','typography3D','scramble','blackout','matrix', 'machinegun text (new)'
 3. justSplit = boolean (just split only returns the splited text based on type, no animation)
 4. duration = ...in seconds
 5. colorize = color hex (if effect is colorize or glowOnHover)

@@ -5,9 +5,9 @@
 	$.fn.splitText = function(options){
 		
 		// options //
-		// type = 'lines','words','letters'
-		// animation = 'explode','slide','opacity','3D','colorize','smoke','glowOnHover','scramble'
-		// justSplit = 'lines','words','letters'
+		// type = 'lines','words','letters', 'sentences' (new) 
+		// animation = 'explode','slide','opacity','3D','colorize','smoke','glowOnHover','scramble', 'machinegun' (new)
+		// justSplit = 'lines','words','letters', 'sentences' (new)
 		// duration = ...in seconds
 		// colorize = color hex (if effect is colorize) or glowOnHover
 		// scale    = boolean
@@ -26,7 +26,7 @@
 			'useCSS'	: false
 		};
 		
-		if(options == null || options == undefined || options == '' || (options.type !== 'words' && options.type !== 'lines' && options.type !== 'letters')){
+		if(options == null || options == undefined || options == '' || (options.type !== 'words' && options.type !== 'lines' && options.type !== 'letters' && options.type !== 'sentences')){
 			options = opts;
 		}
 		
@@ -81,7 +81,7 @@
 		
 		//// SET ANIMATION TYPE ///
 		
-		
+		console.log(options.type);
 		if(options.type=='lines'){
 			
 			var result = splitWords(userInput);
@@ -125,6 +125,16 @@
 			element.empty();
 			element.html(result);
 		}
+		else if(options.type == 'sentences'){
+			var result  = splitSentences(initialText);
+			
+			if(options.justSplit == true){
+				return { 'id':element.attr('id'), 'value':result };
+			}
+			
+			element.empty();
+			element.html(result);
+		}
 		
 		
 		/////////////////////////////////////////////////////////////////////
@@ -148,9 +158,17 @@
 		   return arr.join(" ");
 		}
 		
-		function splitWords(userInput){
+		function splitWords(userInput, justSplit){
 			  var a = userInput.replace(/\n/g, " \n<br/> ").split(" ");
    
+   			   if(justSplit == true){
+   			   		$.each(a, function(i, val) { 
+			      		if(!val.match(/\n/) && val!="") a[i] = val;
+			   		});
+			   		
+			   		return a;
+   			   }
+   			   
 			   $.each(a, function(i, val) { 
 			      if(!val.match(/\n/) && val!="") a[i] = '<div class="word-measure">' + val + '</div>';
 			   });
@@ -165,20 +183,58 @@
 		   var lineAcc = [element.children(".word-measure:eq(0)").text()];
 		   var textAcc = [];
 		   for(var i=1; i<count; i++){
-		      var prevY = element.children(".word-measure:eq("+(i-1)+")").offset().top;
-		      if(element.children(".word-measure:eq("+i+")").offset().top==prevY){
-		         lineAcc.push(element.children(".word-measure:eq("+i+")").text());
-		   } 
-		   else {
-		     textAcc.push({text: lineAcc.join(" "), top: prevY});
-		     lineAcc = [element.children(".word-measure:eq("+i+")").text()];
-		   }
+			      var prevY = element.children(".word-measure:eq("+(i-1)+")").offset().top;
+			   if(element.children(".word-measure:eq("+i+")").offset().top==prevY){
+			         lineAcc.push(element.children(".word-measure:eq("+i+")").text());
+			   } 
+			   else {
+			     textAcc.push({text: lineAcc.join(" "), top: prevY});
+			     lineAcc = [element.children(".word-measure:eq("+i+")").text()];
+			   }
 		   }
 		   textAcc.push({text: lineAcc.join(" "), top: element.children(".word-measure:last").offset().top});
 		   return textAcc;
 		   
 		}
+		
+		function splitSentences(userInput){
+			
+			 var regExp = /[^\.!\?]+[\.!\?]+/g;
+			 
+			 var words = splitWords(userInput,true);
+			 
+			 var sentencesArr = String(userInput).match(regExp);
+			 var textAcc = new Array();
+			 
+			 for(var i = 0; i < sentencesArr.length; i++){
+			 	 textAcc.push({ 'text' : sentencesArr[i] });
+			 }
+			 
+			 console.log(words);
+			 
+			 textAcc = new Array();
+			 
+			 for(var j = 0; j < words.length; j++ ){
+			  	var word = words[j];
+			    isSentenceEnd = regExp.test(word);
+			    if(isSentenceEnd){
+			    	words[j] = "<div class='split-sentences endOfSentence'>" + word + "</div>";
+			    }
+			    else{
+			    	words[j] = "<div class='split-sentences'>" + word + "</div>";
+			    }
+			    
+			    textAcc.push(words[j]);
+			    
+			 }
+			 
+			 var arr = words.join(" ");
+			 return arr;
+			
+			
+		}
 	
+
 		 this.animate = function() {
 		 	
 		 	
@@ -256,6 +312,38 @@
 			         		TweenMax.to($(this), options.duration, getBlackout());
 			         	});
 			  	});
+		 		
+		 	}
+		 	else if( options.animation == 'machinegun'){
+		 		
+			    var tl = new TimelineMax({delay:0.6, repeat:2, repeatDelay:4});
+			    var time = 0;
+			    var item;
+			 	element.children().each(function(index, value){
+			 		 
+			 		 item = $(this);
+			 		 duration = Math.max(0.5, item.length * 0.08);
+			 		 console.log(duration);
+			 		
+			 		 var isSentenceEnd = item.hasClass('endOfSentence');
+			 		 if (isSentenceEnd) {
+				      duration += 0.6; //if it's the last word in a sentence, drag out the timing a bit for a dramatic pause.
+				    }
+				    //set opacity and scale to 0 initially. We set z to 0.01 just to kick in 3D rendering in the browser which makes things render a bit more smoothly.
+				    TweenLite.set(item, {autoAlpha:0, scale:0, z:0.01});
+				    //the SlowMo ease is like an easeOutIn but it's configurable in terms of strength and how long the slope is linear. See http://www.greensock.com/v12/#slowmo and http://api.greensock.com/js/com/greensock/easing/SlowMo.html
+				    tl.to(item, duration, {scale:1.2,  ease:SlowMo.ease.config(0.25, 0.9)}, time)
+				      //notice the 3rd parameter of the SlowMo config is true in the following tween - that causes it to yoyo, meaning opacity (autoAlpha) will go up to 1 during the tween, and then back down to 0 at the end. 
+						 	.to(item, duration, {autoAlpha:1, ease:SlowMo.ease.config(0.25, 0.9, true)}, time);
+				    time += duration - 0.05;
+				    if (isSentenceEnd) {
+				      time += 0.6; //at the end of a sentence, add a pause for dramatic effect.
+				    
+				  		}
+			 	
+			 	});
+			   
+			   
 		 		
 		 	}
 		 	else if(options.animation == 'matrix'){
